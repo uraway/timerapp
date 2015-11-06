@@ -10,34 +10,33 @@
 <div id="container"></div>
 <script type="text/babel">
 
-
 var Timer = React.createClass({
-  getInitialState: function(){
-    return {elapsed:0};
+  getInitialState: function() {
+    return {secondsElapsed: 0};
   },
-  tick: function(){
-    this.setState({elapsed: this.state.elapsed + 1});
+  tick: function() {
+    this.setState({secondsElapsed: this.state.secondsElapsed + 1});
   },
-  componentDidMount: function(){
+  componentDidMount: function() {
     this.interval = setInterval(this.tick, 1000);
   },
-  componentWillMount: function(){
+  componentWillUnmount: function() {
     clearInterval(this.interval);
   },
-  render: function(){
+  render: function() {
     return (
-      <div>
-      elapsed: {this.state.elapsed}
+      <div>Seconds Elapsed: {this.state.secondsElapsed}
+      <form>
+      <button>start</button><button>stop</button>
+      </form>
       </div>
     );
   }
-   }
 });
 
- React.render(
-   <Timer />,
-   document.getElementById("container")
- );
+
+ReactDOM.render(<Timer />, document.getElementById('container'));
+
 
 </script>
 </body>
