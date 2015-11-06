@@ -7,35 +7,45 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 </head>
 <body>
-<div id="container"></div>
+<div></div>
 <script type="text/babel">
 
+var ticking = 0;
 var Timer = React.createClass({
+
   getInitialState: function() {
     return {secondsElapsed: 0};
   },
   tick: function() {
     this.setState({secondsElapsed: this.state.secondsElapsed + 1});
   },
-  componentDidMount: function() {
-    this.interval = setInterval(this.tick, 1000);
+  start: function() {
+    if(ticking==0){
+    this.interval = setInterval(this.tick, 1000),
+    ticking = 1;
+  }},
+  stop: function() {
+    if(ticking==1){
+      clearInterval(this.interval),
+      ticking = 0;
+    }
   },
-  componentWillUnmount: function() {
-    clearInterval(this.interval);
-  },
+
   render: function() {
     return (
-      <div>Seconds Elapsed: {this.state.secondsElapsed}
-      <form>
-      <button>start</button><button>stop</button>
-      </form>
+      <div>
+      Seconds Elapsed: {this.state.secondsElapsed}
+<br>
+      <button onClick={this.start}>start</button>
+      <button onClick={this.stop}>stop</button>
+</br>
       </div>
     );
   }
 });
 
 
-ReactDOM.render(<Timer />, document.getElementById('container'));
+ReactDOM.render(<Timer />, document.body);
 
 
 </script>
