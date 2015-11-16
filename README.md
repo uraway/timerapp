@@ -12,5 +12,8 @@ Change directory and run the below command at project root.
 
     $ cd ./timerapp
     $ npm install
+    $ npm start
+
+The app working at http://127.0.0.1:8000/timer.html
 
 And more..
